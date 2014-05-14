@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<ui:composition template="/template.xhtml">
+
+	<ui:define name="pageTitle">
+		Controle de produtos (Bens de consumo)
+	</ui:define>
+
+	<ui:define name="pageHeader">
+		<div align="left"><h:panelGrid columns="2">
+			<h:graphicImage value="img/usuario.png" width="40px" />
+			<h:outputLabel
+				value="Usuario autenticado: #{usuarioBean.usuario.nome}"
+				styleClass="uppercase" />
+		</h:panelGrid></div>
+	</ui:define>
+
+	<ui:define name="menuNorte">
+		<ui:include src="/menu-norte.xhtml" />
+	</ui:define>
+
+	<ui:define name="body">
+
+		<a4j:loadScript src="js/jquery.maskedinput-1.2.2.js" />
+
+		<h:panelGroup id="painelGlobal">
+			<h:panelGrid columns="1" width="100%">
+
+				<h:form id="form1">
+					<rich:panel>
+						<f:facet name="header">
+							<h:outputLabel value="Acolhidos por molestia ou categoria" />
+						</f:facet>
+
+						<h:panelGrid columns="2">
+
+							<h:outputLabel value="Categoria:" styleClass="label" />
+							<h:column>
+								<a4j:region>
+									<h:selectOneMenu styleClass="input" id="categorias"
+										value="#{relatoriosBean.molestia.categoria}"
+										style="border-style: dotted;border-color: #999999; color: #000000; font-size: 12px;">
+										<f:selectItem itemLabel="--Selecione--" itemValue="#{null}"></f:selectItem>
+										<f:selectItems value="#{categoriaMolestiaBean.categorias}"/>
+										<a4j:support event="onchange" 
+												actionListener="#{relatoriosBean.atualizarMolestias}"
+												reRender="painelGlobal" />
+									</h:selectOneMenu>
+								</a4j:region>
+							</h:column>
+
+
+							<h:outputLabel value="Mol�stia:" styleClass="label" />
+							<h:column>
+								<a4j:region>
+									<h:selectOneMenu styleClass="input"
+										value="#{relatoriosBean.molestia.id}"
+										style="border-style: dotted;border-color: #999999; color: #000000; font-size: 12px;">
+										<f:selectItem itemLabel="--Selecione--" itemValue="#{null}"></f:selectItem>
+										<f:selectItems value="#{relatoriosBean.molestias}">
+										</f:selectItems>
+									</h:selectOneMenu>
+								</a4j:region>
+							</h:column>
+
+						</h:panelGrid>
+
+					</rich:panel>
+
+					<center><h:commandButton value="Visualizar"
+						styleClass="btn" style="background-image:url(bg_rodape.png);"
+						actionListener="#{relatoriosBean.viewReport}"/>
+
+					<rich:spacer width="3px" /> <a4j:commandButton value="Limpar"
+						styleClass="btn" style="background-image:url(bg_rodape.png);"
+						actionListener="#{relatoriosBean.limpar}" reRender="painelGlobal"
+						onclick="#{rich:component('carregando')}.show();"
+						oncomplete="#{rich:component('carregando')}.hide();" /> <rich:spacer
+						width="3px" /> <rich:spacer width="3px" /></center>
+
+					<rich:modalPanel id="carregando" width="260" height="50"
+						autosized="true">
+						<center><img src="img/20-1.gif" /> <h:outputLabel
+							style="font-size : 8pt;" value="Carregando..." /> <br></br>
+						</center>
+					</rich:modalPanel>
+				</h:form>
+
+				
+			</h:panelGrid>
+		</h:panelGroup>
+
+		<rich:modalPanel id="confirmaDelete" width="350" height="100">
+			<f:facet name="header">
+				<h:panelGroup>
+					<h:outputText value="Confirmacao de Operacao"></h:outputText>
+				</h:panelGroup>
+			</f:facet>
+			<f:facet name="controls">
+				<h:panelGroup>
+					<h:graphicImage value="/img/close.png" style="cursor:pointer"
+						id="hidelinkDelete" />
+					<rich:componentControl for="confirmaDelete"
+						attachTo="hidelinkDelete" operation="hide" event="onclick" />
+				</h:panelGroup>
+			</f:facet>
+
+			<h:form id="formConfirmRemove">
+
+				<div align="center"><h:outputText styleClass="warning"
+					value="Deseja excluir o(s) registro(s) selecionado(s)?"></h:outputText>
+				<br />
+				<rich:spacer height="30" /> <a4j:commandButton value="Sim"
+					reRender="painelGlobal" styleClass="btn"
+					style="background-image:url(bg_rodape.png)"
+					onclick="javascript:Richfaces.showModalPanel('carregando');"
+					oncomplete="javascript:Richfaces.hideModalPanel('confirmaDelete');javascript:Richfaces.hideModalPanel('carregando');javascript:Richfaces.showModalPanel('avisos');"
+					actionListener="#{bemConsumoBean.removerSelecionados}">
+				</a4j:commandButton> <rich:spacer height="30" /> <a4j:commandButton value="Nao"
+					reRender="painelGlobal" styleClass="btn"
+					style="background-image:url(bg_rodape.png)"
+					actionListener="#{bemConsumoBean.cancelarRemocao}"
+					onclick="javascript:Richfaces.hideModalPanel('confirmaDelete')" />
+				</div>
+			</h:form>
+		</rich:modalPanel>
+
+	</ui:define>
+
+</ui:composition>
+</html>
