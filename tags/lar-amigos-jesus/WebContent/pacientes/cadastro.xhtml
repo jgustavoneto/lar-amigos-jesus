@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+	
+<h:form>
+
+	<rich:panel>
+		<f:facet name="header">
+			<h:outputLabel value="Tempo para comprar" />
+		</f:facet>
+		
+		<h:panelGrid columns="2" styleClass="align:center">
+			<h:outputLabel value="Paciente:" />
+			<h:inputText value="#{pacienteBean.paciente.nome}"/>
+
+			<h:outputLabel value="Idade:"/>
+			<h:inputText size="1" maxlength="2"/>
+
+			<h:outputLabel value="Data Nascimento:" />
+			<rich:calendar datePattern="dd/MM/yyyy" inputSize="10" enableManualInput="true" 
+				id="dataNascimento" value="#{pacienteBean.paciente.nascimento}">
+			</rich:calendar>
+
+			<h:outputLabel value="Data Entrada:" />
+			<rich:calendar datePattern="dd/MM/yyyy" inputSize="10" 
+				enableManualInput="true" value="#{pacienteBean.paciente.entrada}"> 
+			</rich:calendar>
+
+		</h:panelGrid>
+
+		<a4j:commandButton value="Cadastrar" 
+			actionListener="#{pacienteBean.salvar}"
+			reRender="painelGlobal"/>
+
+	</rich:panel>
+	
+	<rich:modalPanel id="carregando" width="250" height="50">
+         <img src="img/20-1.gif"/>
+         <h:outputLabel style="font-size : 8pt;" value="Carregando..." />
+         <br></br>
+	</rich:modalPanel>
+
+
+</h:form>
+
+
+</html>

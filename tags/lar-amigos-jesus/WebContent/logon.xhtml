@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<ui:composition template="/template-blank.xhtml">
+
+	<ui:define name="body">
+
+		<style type="text/css">
+.avisoAcesso {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 11px;
+	color: red;
+}
+
+.legend {
+	font-family: Verdana;
+	color: #999999;
+	font-style:italic;
+	font-weight:bold;
+	font-size:11px;
+	background-color:#FFFFFF;
+}
+
+.fieldset {
+	width: 100%; border:dotted 1px #CCCCCC; padding:5px; text-align: -moz-center;
+}
+</style>
+		
+		<h:panelGrid columns="1" id="global">
+
+			<a4j:form>
+				<fieldset style="width: 400px; border:dotted 1px #CCCCCC; padding:5px; text-align: -moz-center;"><legend > <h:outputText
+					value="Acesso ao sistema" styleClass="legend" /> </legend>
+
+				<center><h:panelGrid columns="2">
+					<h:outputLabel value="Usua&aacute;rio:" styleClass="label" />
+					<h:inputText value="#{usuarioBean.usuario.usuario}"
+						styleClass="label_logon" style="border-style: dotted;border-color: #999999; color: #000000; font-size: 12px;"/>
+					<h:outputLabel value="Senha:" styleClass="label" />
+					<h:inputSecret value="#{usuarioBean.usuario.senha}"
+						styleClass="label_logon" style="border-style: dotted;border-color: #999999; color: #000000; font-size: 12px;"/>
+				</h:panelGrid> <h:panelGrid columns="2">
+					<a4j:commandButton value="Acessar" styleClass="btn" 
+						onclick="javascript:Richfaces.showModalPanel('carregando');"
+						oncomplete="javascript:Richfaces.hideModalPanel('carregando');javascript:Richfaces.showModalPanel('login_invalido')"
+						action="#{usuarioBean.acessar}" reRender="global"
+						style="background-image:url(bg_rodape.png);" />
+
+					<a4j:commandButton value="Limpar" styleClass="btn"
+						actionListener="#{usuarioBean.limpar}" reRender="global"
+						style="background-image:url(bg_rodape.png);" />
+				</h:panelGrid></center>
+				</fieldset>
+
+			</a4j:form>
+
+			<rich:modalPanel id="carregando" width="250" height="50">
+				<img src="img/ajax-loader2.gif" />
+				<h:outputLabel style="font-size : 8pt;" value="Carregando..." />
+				<br></br>
+			</rich:modalPanel>
+
+			<rich:modalPanel id="login_invalido" width="400" autosized="true"
+				rendered="#{usuarioBean.usuario.id==null}">
+				<f:facet name="header">
+					<h:panelGroup>
+						<h:outputText value="Aviso"></h:outputText>
+					</h:panelGroup>
+				</f:facet>
+				<h:panelGroup id="txt2">
+					<center><h:panelGrid columns="2">
+						<h:graphicImage value="img/warning.png" />
+						<h:outputText value="Ocorreu um erro ao efetuar login!"
+							styleClass="avisoAcesso"></h:outputText>
+							
+					</h:panelGrid><h:messages /></center>
+				</h:panelGroup>
+				<div style="vertical-align: bottom; text-align: center"><a4j:commandButton
+					value=" OK " styleClass="btn" reRender="painelGlobal"
+					onclick="javascript:Richfaces.hideModalPanel('login_invalido')" /></div>
+			</rich:modalPanel>
+		</h:panelGrid>
+
+	</ui:define>
+</ui:composition>
+</html>
