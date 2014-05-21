@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<style type="text/css">
+.avisoAcesso {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 11px;
+	color: red;
+}
+</style>
+
+<h:form>
+
+	<rich:toolBar height="20px">
+
+		<rich:dropDownMenu>
+			<f:facet name="label">
+				<h:panelGrid columns="2">
+					<h:graphicImage value="img/user.png" styleClass="pic" />
+					<h:outputText value="Acesso" />
+				</h:panelGrid>
+
+			</f:facet>
+			<rich:menuItem value="Sair" icon="img/door_out.png"
+				actionListener="#{usuarioBean.logout}"
+				action="#{usuarioBean.logout}"
+				onclick="javascript:Richfaces.showModalPanel('avisos')">
+			</rich:menuItem>
+		</rich:dropDownMenu>
+
+
+
+		<rich:dropDownMenu>
+			<f:facet name="label">
+
+				<h:panelGrid columns="2">
+					<h:graphicImage value="img/wrench.png" styleClass="pic" />
+					<h:outputText value="Opcoes" />
+				</h:panelGrid>
+			</f:facet>
+			<rich:menuItem value="Gerenciamento de Acolhidos"
+				icon="img/group.png" action="#{pacienteBean.iniciarGerenciamento}">
+			</rich:menuItem>
+
+			<rich:menuItem value="Bens de Consumo" icon="img/cart_put.png"
+				submitMode="none"
+				onclick="location.href='/lar-amigos-jesus/bens-consumo.jsf'">
+			</rich:menuItem>
+			
+			<rich:menuItem value="Categoria(s) Bens Consumo" icon="img/cart_put.png"
+				submitMode="none"
+				onclick="location.href='/lar-amigos-jesus/categoria-bens-consumo.jsf'">
+			</rich:menuItem>
+
+			<rich:menuItem value="Cadastro de Moléstias" icon="img/bug.png"
+				submitMode="none"
+				onclick="location.href='/lar-amigos-jesus/molestias.jsf'">
+			</rich:menuItem>
+			
+			<rich:menuItem value="Categoria(s) Moléstias" icon="img/bug.png"
+				submitMode="none"
+				onclick="location.href='/lar-amigos-jesus/categoria-molestia.jsf'">
+			</rich:menuItem>
+
+			<rich:menuItem value="Unidades de Encaminhamento"
+				icon="img/building_go.png" submitMode="none"
+				onclick="location.href='/lar-amigos-jesus/unidades-encaminhamento.jsf'">
+			</rich:menuItem>
+
+			<rich:menuItem value="Controle de Frequencia"
+				icon="img/3x3_grid_16x16.png" action="#{frequenciaBean.iniciar}">
+				<!-- onclick="location.href='/lar-amigos-jesus/frequencia.jsf'" -->
+
+			</rich:menuItem>
+		</rich:dropDownMenu>
+
+
+		<rich:dropDownMenu>
+			<f:facet name="label">
+
+				<h:panelGrid columns="2">
+					<h:graphicImage value="img/report.png" styleClass="pic" />
+					<h:outputText value="Relatórios" />
+				</h:panelGrid>
+			</f:facet>
+
+			<rich:menuItem value="Acolhidos por moléstia"
+				icon="img/report_magnify.png" submitMode="none"
+				onclick="location.href='/lar-amigos-jesus/acolhidos-molestias.jsf'">
+			</rich:menuItem>
+
+			<rich:menuItem value="Quantitativo de acolhidos por Moléstia" icon="img/report_key.png"
+				onclick="alert('Relatório em testes')" submitMode="none">
+
+			</rich:menuItem>
+
+			<rich:menuItem value="Acolhidos por entrada/obito"
+				icon="img/report_key.png" onclick="alert('Relatório em testes')" submitMode="none">
+
+			</rich:menuItem>
+			
+			<rich:menuItem value="Frequência por acolhido"
+				icon="img/report_key.png" onclick="alert('Relatório em testes')" submitMode="none">
+
+			</rich:menuItem>
+
+		</rich:dropDownMenu>
+		
+		<rich:dropDownMenu>
+			<f:facet name="label">
+
+				<h:panelGrid columns="2">
+					<h:graphicImage value="img/wrench.png" styleClass="pic" />
+					<h:outputText value="Serviço Social" />
+				</h:panelGrid>
+			</f:facet>
+			<rich:menuItem value="Acompanhamento do Acolhido"
+				icon="img/group.png" action="#{pacienteBean.iniciarGerenciamento}">
+			</rich:menuItem>
+		</rich:dropDownMenu>
+		
+	</rich:toolBar>
+
+	<rich:modalPanel id="carregando" width="250" height="50">
+		<img src="img/ajax-loader2.gif" />
+		<h:outputLabel style="font-size : 8pt;" value="Carregando..." />
+		<br></br>
+	</rich:modalPanel>
+
+
+</h:form>
+</html>

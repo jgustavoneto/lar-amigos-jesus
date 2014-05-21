@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#*" PATH="/*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:0" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="tela-admin::#admin.xhtml" NAME="output"
+    PATH="/admin.xhtml" TARGET="rules:#admin.xhtml" TITLE="tela-admin" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="tela-login::#logon.xhtml" NAME="output1"
+    PATH="/logon.xhtml" TARGET="rules:#logon.xhtml" TITLE="tela-login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="tela-estadia::#estadia.xhtml" NAME="output2"
+    PATH="/estadia.xhtml" TARGET="rules:#estadia.xhtml"
+    TITLE="tela-estadia" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="tela-pacientes::#acolhidos.xhtml"
+    NAME="output3" PATH="/acolhidos.xhtml"
+    TARGET="rules:#acolhidos.xhtml" TITLE="tela-pacientes" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="tela-frequencia::#frequencia.xhtml"
+    NAME="output4" PATH="/frequencia.xhtml"
+    TARGET="rules:#frequencia.xhtml" TITLE="tela-frequencia" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#admin.xhtml" PATH="/admin.xhtml"
+  SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#logon.xhtml" PATH="/logon.xhtml"
+  SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#estadia.xhtml" PATH="/estadia.xhtml"
+  SHAPE="272,321,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#frequencia.xhtml" PATH="/frequencia.xhtml"
+  SHAPE="304,497,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#acolhidos.xhtml" PATH="/acolhidos.xhtml"
+  SHAPE="304,497,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>
